@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Điểm danh</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-background></app-background>
+  <ion-card class="student-box" tappable (click) ='checkStudent($event)'>
+    <ion-card-header>
+      <ion-img src="../assets/images/login-avatar.png" class="student-ava"></ion-img>
+    </ion-card-header>
+    <ion-card-content class='student-info'>
+      <ion-text>
+        <p class="stu stu-name">Nguyễn Văn A</p>
+        <p class="stu stu-id">3001180755</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="student-box" tappable (click) ='checkStudent($event)'>
+    <ion-card-header>
+      <ion-img src="../assets/images/login-avatar.png" class="student-ava"></ion-img>
+    </ion-card-header>
+    <ion-card-content class='student-info'>
+      <ion-text>
+        <p class="stu stu-name">Nguyễn Văn A</p>
+        <p class="stu stu-id">3001180755</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
+<ion-footer>
+  <ion-buttons>
+    <ion-button class="end-check-btn">
+      Kết thúc điểm danh
+    </ion-button>
+  </ion-buttons>
+</ion-footer>

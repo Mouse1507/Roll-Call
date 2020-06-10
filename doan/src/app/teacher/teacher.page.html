@@ -1,0 +1,19 @@
+<ion-header class="header-home">
+  <ion-toolbar>
+    <ion-title>teacher</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu='main-menu' class="menu-toggle-but"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="teacher-box">
+    <ion-tabs>
+      <ion-tab-bar slot='top'>
+        <ion-tab-button tab='info' class="btn-teacher active" (click)= 'clickBtn($event)'>Thông tin</ion-tab-button>
+        <ion-tab-button tab='class' class="btn-teacher" (click)= 'clickBtn($event)'>Lịch Giảng</ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </div>
+</ion-content>

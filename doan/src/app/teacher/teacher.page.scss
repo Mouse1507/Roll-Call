@@ -1,0 +1,31 @@
+.header-ios ion-toolbar:last-of-type {
+    --border-width: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+}
+.teacher-box {
+    background-color: rgba(0, 23, 68,0.7);
+    height:100%;
+}
+.header-home {
+    background-color: white;
+}
+.menu-toggle-but {
+    color: rgba(0, 23, 68);
+}
+ion-tabs ion-tab-bar {
+    background-color: transparent;
+}
+.btn-teacher {
+    width:100%;
+    margin:0 auto;
+    color:white;
+    background-color: inherit;
+    font-size:15px;
+}
+.btn-teacher.active {
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    color:red;
+    background-color:white;
+}

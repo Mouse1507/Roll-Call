@@ -1,0 +1,72 @@
+// back to top
+// .back-to-top-but {
+//   width:50px;
+//   height:50px;
+// }
+.home-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: rgba(0, 23, 68);
+}
+
+.introduce-content {
+  border: solid 5px rgba(0, 23, 68);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  width: 100%;
+  padding: 10px;
+  color: rgba(0, 23, 68);
+  background: hsla(67, 95%, 95%, 1);
+}
+
+.direction {
+  width: 100%;
+  position: relative;
+}
+
+.direction .line {
+  background-color: rgba(0, 23, 68);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 30px;
+  height: 3px;
+}
+
+.direction .line-b1 {
+  width: 50px;
+  top: -10px;
+}
+
+.direction .line-b2 {
+  width: 40px;
+  top: -5px;
+}
+
+.direction .line-b3 {
+  width: 30px;
+  top: 0px;
+}
+
+.direction .line-b4 {
+  width: 20px;
+  top: 5px;
+}
+
+.direction .line-b5 {
+  width: 10px;
+  top: 10px;
+}
+
+.begin-but {
+  margin-top: 20px;
+}
+
+.begin-but ion-button {
+  margin: 0 auto;
+  background-color: rgba(0, 23, 68);
+  color: white;
+  border-radius: 20px;
+  padding: 0 5px;
+}
