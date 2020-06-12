@@ -15,5 +15,21 @@
       </ion-list>
     </ion-content>
   </ion-menu>
+  <ion-menu class='admin-menu' type='push' side="start" menuId="admin-menu" contentId="main">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title class="title-menu">admin</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list class="list-menu">
+        <ion-item tappable routerLink='/admin'>Trang chủ</ion-item>
+        <ion-item tappable routerLink='/manage-class'>Class</ion-item>
+        <ion-item tappable routerLink='/manage-student'>Student</ion-item>
+        <ion-item tappable routerLink='/manage-subject'>Môn</ion-item>
+        <ion-item tappable routerLink='/manage-teacher'>teacher</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

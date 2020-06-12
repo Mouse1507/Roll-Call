@@ -11,5 +11,11 @@ export class AdminPage implements OnInit {
 
   ngOnInit() {
   }
-
+  clickBtn(event) {
+    var btnTeacher = document.querySelectorAll(".btn-admin");
+    btnTeacher.forEach(btn => {
+      btn.classList.remove('active');
+    });
+    event.currentTarget.classList.add('active');
+  }
 }

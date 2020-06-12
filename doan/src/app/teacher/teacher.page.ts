@@ -16,6 +16,6 @@ export class TeacherPage implements OnInit {
     btnTeacher.forEach(btn => {
       btn.classList.remove('active');
     });
-    event.target.classList.add('active');
+    event.currentTarget.classList.add('active');
   }
 }

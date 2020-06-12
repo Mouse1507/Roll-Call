@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button menu='admin-menu' class="menu-toggle-but"></ion-menu-button>
+    </ion-buttons>
     <ion-title>admin</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="admin-box">
+    <ion-tabs>
+      <ion-tab-bar slot='top'>
+        <ion-tab-button tab='teacher' class="btn-admin active" (click)='clickBtn($event)'>
+          <ion-icon size='small' name="people-sharp"></ion-icon>
+          <ion-text>
+            <p class="name-icon">Giáo Viên</p>
+          </ion-text> 
+        </ion-tab-button>
+        <ion-tab-button tab='class' class="btn-admin" (click)='clickBtn($event)'>
+          <ion-icon size='small' name="home-sharp"></ion-icon>
+          <ion-text>
+            <p class="name-icon">Lớp</p>
+          </ion-text> 
+        </ion-tab-button>
+        <ion-tab-button tab='student' class="btn-admin" (click)='clickBtn($event)'>
+          <ion-icon size='small' name="school-sharp"></ion-icon>
+          <ion-text>
+            <p class="name-icon">Học Sinh</p>
+          </ion-text> 
+        </ion-tab-button>
+        <ion-tab-button tab='subject' class="btn-admin" (click)='clickBtn($event)'>
+          <ion-icon size='small' name="library-sharp"></ion-icon>
+          <ion-text>
+            <p class="name-icon">Môn Học</p>
+          </ion-text> 
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </div>
 </ion-content>

@@ -1,0 +1,26 @@
+.header-ios ion-toolbar:last-of-type {
+    --border-width: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+}
+ion-header{
+    background-color: rgba(0,23,68,0.6);
+}
+ion-title{
+    color:white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.menu-toggle-but {
+    color:white;
+}
+.btn-admin {
+    color:black;
+    font-size:12px;
+}
+.btn-admin.active {
+    background-color:rgba(0,23,68,0.6);
+    color:white;
+}
+.name-icon {
+    margin:0;
+}
