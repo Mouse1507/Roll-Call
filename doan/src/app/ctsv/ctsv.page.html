@@ -1,6 +1,6 @@
-<ion-header class="header-home">
+<ion-header>
   <ion-toolbar>
-    <ion-title>teacher</ion-title>
+    <ion-title>Thống kê</ion-title>
     <ion-buttons slot='end'>
       <ion-button routerLink='/home'>
         <ion-icon name='log-out' class="log-out-icon"></ion-icon>
@@ -13,8 +13,8 @@
   <div class="teacher-box">
     <ion-tabs>
       <ion-tab-bar slot='top'>
-        <ion-tab-button tab='info' class="btn-teacher active" (click)= 'clickBtn($event)'>Thông tin</ion-tab-button>
-        <ion-tab-button tab='class' class="btn-teacher" (click)= 'clickBtn($event)'>Lịch Giảng</ion-tab-button>
+        <ion-tab-button tab='ctrl-class' class="btn-teacher active" (click)= 'clickBtn($event)'>Theo Lớp</ion-tab-button>
+        <ion-tab-button tab='ctrl-subject' class="btn-teacher" (click)= 'clickBtn($event)'>Theo Môn</ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
   </div>

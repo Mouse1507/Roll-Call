@@ -6,15 +6,6 @@
     background-color: rgba(0, 23, 68,0.7);
     height:100%;
 }
-.header-home {
-    background-color: white;
-}
-.menu-toggle-but {
-    color: rgba(0, 23, 68);
-}
-ion-tabs ion-tab-bar {
-    background-color: transparent;
-}
 .btn-teacher {
     width:100%;
     margin:0 auto;
@@ -28,6 +19,12 @@ ion-tabs ion-tab-bar {
     border-bottom: 1px solid lightgray;
     color:red;
     background-color:white;
+}
+.menu-toggle-but {
+    color: rgba(0, 23, 68);
+}
+ion-tabs ion-tab-bar {
+    background-color: transparent;
 }
 .log-out-icon {
     color:rgba(0, 23, 68);

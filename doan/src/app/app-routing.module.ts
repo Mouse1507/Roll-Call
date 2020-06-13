@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
+  },
+  {
+    path: 'ctsv',
+    loadChildren: () => import('./ctsv/ctsv.module').then( m => m.CtsvPageModule)
   }
 ];
 

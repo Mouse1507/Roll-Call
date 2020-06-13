@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminPage } from './admin.page';
+import { HomePage } from '../home/home.page';
 
 const routes: Routes = [
   {
@@ -10,25 +11,29 @@ const routes: Routes = [
     children: [
       {
         path: 'teacher',
-        loadChildren: () => import('../admin-pages/manage-teacher/manage-teacher.module').then( m => m.ManageTeacherPageModule)
+        loadChildren: () => import('./manage-teacher/manage-teacher.module').then( m => m.ManageTeacherPageModule)
       },
       {
         path: 'class',
-        loadChildren: () => import('../admin-pages/manage-class/manage-class.module').then( m => m.ManageClassPageModule)
+        loadChildren: () => import('./manage-class/manage-class.module').then( m => m.ManageClassPageModule)
       },
       {
         path: 'student',
-        loadChildren: () => import('../admin-pages/manage-student/manage-student.module').then( m => m.ManageStudentPageModule)
+        loadChildren: () => import('./manage-student/manage-student.module').then( m => m.ManageStudentPageModule)
       },
       {
         path: 'subject',
-        loadChildren: () => import('../admin-pages/manage-subject/manage-subject.module').then( m => m.ManageSubjectPageModule)
+        loadChildren: () => import('./manage-subject/manage-subject.module').then( m => m.ManageSubjectPageModule)
       },
       {
         path: '',
-        loadChildren: () => import('../admin-pages/manage-teacher/manage-teacher.module').then( m => m.ManageTeacherPageModule)
+        loadChildren: () => import('./manage-teacher/manage-teacher.module').then( m => m.ManageTeacherPageModule)
       }
     ]
+  },
+  {
+    path: 'home',
+    component :HomePage
   }
 ];
 

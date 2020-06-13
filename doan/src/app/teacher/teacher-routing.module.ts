@@ -10,15 +10,15 @@ const routes: Routes = [
     children: [
       {
         path: 'info',
-        loadChildren: () => import('../teacher-info/teacher-info.module').then( m => m.TeacherInfoPageModule)
+        loadChildren: () => import('./teacher-info/teacher-info.module').then( m => m.TeacherInfoPageModule)
       },
       {
         path: 'class',
-        loadChildren: () => import('../teacher-class/teacher-class.module').then( m => m.TeacherClassPageModule)
+        loadChildren: () => import('./teacher-class/teacher-class.module').then( m => m.TeacherClassPageModule)
       },
       {
         path: '',
-        loadChildren: () => import('../teacher-info/teacher-info.module').then( m => m.TeacherInfoPageModule)
+        loadChildren: () => import('./teacher-info/teacher-info.module').then( m => m.TeacherInfoPageModule)
       }
     ]
   }
