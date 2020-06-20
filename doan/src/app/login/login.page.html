@@ -16,16 +16,16 @@
       <ion-text>
         <p class="label-lg">Tên đăng nhập / Email</p>
       </ion-text>
-      <ion-input class="input-lg"></ion-input>
+      <ion-input [(ngModel)]='txtuser' class="input-lg"></ion-input>
       <ion-text>
         <p class="label-lg">Mật khẩu</p>
       </ion-text>
-      <ion-input class="input-lg"></ion-input>
+      <ion-input [(ngModel)]='txtpwd' class="input-lg"></ion-input>
       <ion-text>
         <small class="text-note">Chưa có tài khoản, <i tappable routerLink='/signup'>đăng ký tại đây</i></small>
       </ion-text>
       <ion-buttons>
-        <ion-button class="button-lg log-but">
+        <ion-button class="button-lg log-but" (click)='login()'>
           Đăng Nhập
         </ion-button>
         <ion-button class="button-lg forgot-but" (click) ='forgetPass()'>
@@ -43,7 +43,7 @@
             <ion-icon tappable size='small' name="logo-facebook" class="logo-lg fb-logo"></ion-icon>
           </ion-col>
           <ion-col>
-            <ion-icon tappable size='small' name="logo-google" class="logo-lg gg-logo"></ion-icon>
+            <ion-icon (click)='loginWithGG()' tappable size='small' name="logo-google" class="logo-lg gg-logo"></ion-icon>
           </ion-col>
         </ion-row>
       </ion-grid>

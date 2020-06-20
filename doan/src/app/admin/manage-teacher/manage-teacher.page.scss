@@ -13,10 +13,13 @@
     border:none;
 }
 .each-item:nth-child(odd) > .item-info{
-    background-color: white;
+    background-color:  rgb(168, 184, 216);
+    // color:lightcoral;
+    font-weight: bolder;
 }
 .each-item:nth-child(even) > .item-info{
-    background-color: rgb(102, 116, 143);
+    background-color: rgb(154, 166, 189);
+    font-weight: bolder;
 }
 .item-img {
     width:100%;

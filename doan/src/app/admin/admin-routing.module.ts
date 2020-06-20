@@ -28,13 +28,18 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./manage-teacher/manage-teacher.module').then( m => m.ManageTeacherPageModule)
+      },{
+        path: 'schedule',
+        loadChildren: () => import('./schedule/schedule.module').then( m => m.SchedulePageModule)
       }
     ]
   },
   {
     path: 'home',
     component :HomePage
-  }
+  },
+  
+
 ];
 
 @NgModule({

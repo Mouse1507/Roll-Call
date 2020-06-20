@@ -3,49 +3,87 @@ import { AlertController } from '@ionic/angular';
 import {FbserviceService} from '../../service/fbservice.service';
 
 @Component({
-  selector: 'app-manage-subject',
-  templateUrl: './manage-subject.page.html',
-  styleUrls: ['./manage-subject.page.scss'],
+  selector: 'app-schedule',
+  templateUrl: './schedule.page.html',
+  styleUrls: ['./schedule.page.scss'],
 })
-export class ManageSubjectPage implements OnInit {
+export class SchedulePage implements OnInit {
 
   constructor(public alert: AlertController, private fbs:FbserviceService) { }
-
-  ListOBJ:any
+  ListUsed: any
+  ListRoomFree: any
+  ListSchedule:any
   ngOnInit() {
     this.init()
+    this.fbs.GetFreeTeacher('1', '7', '9').then((res)=>{
+      console.log(res);
+      
+    })
+    // this.fbs.GetListUsed().then((res)=>{
+    //   this.ListRoomFree=[]
+    //   this.ListUsed = res
+    //   this.ListRoom.forEach(room => {
+    //     var check = true
+    //     this.ListUsed.forEach(element => {
+          // if ( element.id == room && element.day == this.day) {
+          //   if(( (parseInt(element.end) > parseInt(this.lsstart) && parseInt(element.end) <= parseInt(this.lsend)) 
+          //   || (parseInt(element.start) >= parseInt(this.lsstart) && parseInt(element.start) < parseInt(this.lsend)) )){
+          //     check = false
+          //   }
+          // }
+    //       console.log('check ne:' +check + '    end:' + element.end);
+          
+    //     });
+        // if(check){
+        //   this.ListRoomFree.push(room)
+        // }
+    //   })
+    //   console.log(this.ListRoomFree);
+      
+    // })
+    
+    
+    
   }
 
-  async showInfo(id, name, tcnumber, lsnumber, start, end)
+  async showInfo(id, idobj, idteacher, max, day, lsstart, lsend, room)
   {
+    var dayy = parseInt(day)+1;
     const alert = await this.alert.create({
       header: 'Infor',
       inputs:[
-        {
-          disabled:true,
-          value: 'Name: '+ name
-        },
         {
           disabled:true,
           value: 'ID: '+ id
         },
         {
           disabled:true,
-          value: 'So tin chi: '+ tcnumber
+          value: 'ID mon hoc: '+ idobj
         },
         {
           disabled:true,
-          value: 'So tiet : '+ lsnumber
+          value: 'ID giao vien : '+ idteacher
         },
         {
           disabled:true,
-          value: 'Ngay bat dau : '+ start
+          value: 'So luong toi da : '+ max
         },
         {
           disabled:true,
-          value: 'Ngay ket thuc: '+ end
+          value: 'Thứ: '+ dayy
         },
-        
+        {
+          disabled:true,
+          value: 'Tiet bat dau: '+ lsstart
+        },
+        {
+          disabled:true,
+          value: 'Tiet ket thuc: '+ lsend
+        },
+        {
+          disabled:true,
+          value: 'Phong hoc: '+ room
+        },
       ],
       buttons:[
         {
@@ -57,14 +95,14 @@ export class ManageSubjectPage implements OnInit {
   }
   init()
   {
-    this.fbs.GetListObject().then((res)=>{
-      this.ListOBJ = res;
+    this.fbs.GetListSchedule().then((res)=>{
+      this.ListSchedule = res;
     })
   }
   async addForm() {
     const alert = await this.alert.create({
       cssClass: 'add-form',
-      header: 'Thêm Môn Học',
+      header: 'Phân lịch',
       inputs: [
         {
           name: 'id',
@@ -72,29 +110,39 @@ export class ManageSubjectPage implements OnInit {
           placeholder: 'ID',
         },
         {
-          name: 'name',
+          name: 'idobj',
           type: 'text',
-          placeholder: 'Name',
+          placeholder: 'ID Mon hoc',
         },
         {
-          name: 'tcnumber',
+          name: 'max',
+          type: 'number',
+          placeholder: 'So luong sv toi da',
+        },
+        {
+          name: 'day',
+          type: 'number',
+          placeholder: 'Thứ',
+        },
+        {
+          name: 'lsstart',
+          type: 'number',
+          placeholder: 'Tiet bat dau',
+        },
+        {
+          name: 'lsend',
+          type: 'number',
+          placeholder: 'Tiet ket thuc',
+        },
+        {
+          name: 'room',
           type: 'text',
-          placeholder: 'So tin chi',
+          placeholder: 'Phong hoc',
         },
         {
-          name: 'lsnumber',
-          type: 'text',
-          placeholder: 'So tiet',
-        },
-        {
-          name: 'start',
-          type: 'date',
-          placeholder: 'Ngay bat dau',
-        },
-        {
-          name: 'end',
-          type: 'date',
-          placeholder: 'Ngay ket thuc',
+          name: 'idteacher',
+          type: "search",
+          placeholder: 'Tiet ket thuc',
         },
       ],
       buttons: [
@@ -220,4 +268,6 @@ export class ManageSubjectPage implements OnInit {
     })
     await alert.present();
   }
+
+  
 }

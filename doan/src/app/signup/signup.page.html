@@ -15,17 +15,17 @@
       <ion-text>
         <p class="label-lg">Tên đăng nhập / Email</p>
       </ion-text>
-      <ion-input class="input-lg"></ion-input>
+      <ion-input [(ngModel)]='txtuser' class="input-lg"></ion-input>
       <ion-text>
         <p class="label-lg">Mật khẩu</p>
       </ion-text>
-      <ion-input class="input-lg"></ion-input>
+      <ion-input [(ngModel)]='txtpwd' class="input-lg"></ion-input>
       <ion-text>
         <p class="label-lg">Xác nhận Mật khẩu</p>
       </ion-text>
-      <ion-input class="input-lg"></ion-input>
+      <ion-input [(ngModel)]='txtrepwd' class="input-lg"></ion-input>
       <ion-buttons>
-        <ion-button class="button-lg log-but">
+        <ion-button (click)='signup()' class="button-lg log-but">
           Đăng Ký
         </ion-button>
       </ion-buttons>

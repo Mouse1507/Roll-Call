@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>admin</ion-title>
     <ion-buttons slot='end'>
-      <ion-button routerLink='/home'>
+      <ion-button (click)='logout()' routerLink='/home'>
         <ion-icon name='log-out' class="log-out-icon"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -35,6 +35,12 @@
           <ion-icon size='small' name="library-sharp"></ion-icon>
           <ion-text>
             <p class="name-icon">Môn Học</p>
+          </ion-text> 
+        </ion-tab-button>
+        <ion-tab-button tab='schedule' class="btn-admin" (click)='clickBtn($event)'>
+          <ion-icon size='small' name="library-sharp"></ion-icon>
+          <ion-text>
+            <p class="name-icon">Phân Lịch</p>
           </ion-text> 
         </ion-tab-button>
       </ion-tab-bar>
