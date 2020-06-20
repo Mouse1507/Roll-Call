@@ -39,14 +39,14 @@ export class ManageClassPage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Hủy',
           role: 'cancel',
           cssClass: 'cancel-alert',
           handler: () => {
             console.log('Confirm Cancel');
           }
         }, {
-          text: 'Ok',
+          text: 'Đồng ý',
           handler: () => {
             console.log('Confirm Ok');
           }

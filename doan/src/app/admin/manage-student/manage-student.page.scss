@@ -15,8 +15,11 @@
 .each-item:nth-child(odd) > .item-info{
     background-color: white;
 }
+.each-item:nth-child(odd) > .item-info .item-id{
+    color: rgb(154, 166, 189);
+}
 .each-item:nth-child(even) > .item-info{
-    background-color: rgb(102, 116, 143);
+    background-color: rgb(154, 166, 189);
 }
 .item-img {
     width:100%;

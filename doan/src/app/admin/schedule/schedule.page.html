@@ -1,41 +1,112 @@
 <ion-content>
-  <ion-grid>
-      <ion-row>
-          <ion-col size="10">
-              <ion-searchbar class="search-list-teacher"></ion-searchbar>
-          </ion-col>
-          <ion-col size="2">
-              <ion-icon tappable name="person-add-sharp" size='large' class="add-icon" (click) = 'addForm()'></ion-icon>
-          </ion-col>
-      </ion-row>
-  </ion-grid>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="10">
+                <ion-searchbar class="search-list-teacher"></ion-searchbar>
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon tappable name="person-add-sharp" size='large' class="add-icon" (click)='openModalAdd()'>
+                </ion-icon>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-  <ion-item-sliding *ngFor='let item of ListSchedule'  class="each-item">
-      <ion-item-options side="start" class="item-function">
-          <ion-item-option color="medium" expandable class="expand-btn edit-btn" (click) ='editForm(item.id, item.idobj, item.idteacher, item.max, item.day, item.lsstart, item.lsend, item.room)'>
-              Edit
-          </ion-item-option>
-      </ion-item-options>
-      <ion-item class="item-info">
-          <ion-grid tappable (click)='showInfo(item.id, item.idobj, item.idteacher, item.max, item.day, item.lsstart, item.lsend, item.room)'>
-              <ion-row>
-                  <ion-col size='3'>
-                      <ion-img src='../assets/images/login-avatar.png' class="item-img"></ion-img>
-                  </ion-col>
-                  <ion-col size='9'>
-                      <ion-text>
-                          <p class="item-name">{{item.id}}</p>
-                          <p class="item-id">{{item.idobj}}</p>
-                          <p class="item-id">{{item.idteacher}}</p>
-                      </ion-text>
-                  </ion-col>
-              </ion-row>
-          </ion-grid>
-      </ion-item>
-      <ion-item-options side="end" class="item-function">
-          <ion-item-option color="danger" expandable class="expand-btn delete-btn" (click) ='delete(item.id)'>
-              Delete
-          </ion-item-option>
-      </ion-item-options>
-  </ion-item-sliding>
+    <ion-item-sliding *ngFor='let item of ListSchedule' class="each-item">
+        <ion-item-options side="start" class="item-function">
+            <ion-item-option color="medium" expandable class="expand-btn edit-btn"
+                (click)='openModalEdit()'>
+                Edit
+            </ion-item-option>
+        </ion-item-options>
+        <ion-item class="item-info">
+            <ion-grid tappable
+                (click)='showInfo(item.id, item.idobj, item.idteacher, item.max, item.day, item.lsstart, item.lsend, item.room)'>
+                <ion-row>
+                    <ion-col size='3'>
+                        <ion-img src='../assets/images/login-avatar.png' class="item-img"></ion-img>
+                    </ion-col>
+                    <ion-col size='9'>
+                        <ion-text>
+                            <p class="item-name">{{item.id}}</p>
+                            <span class="item-id">{{item.idobj}}</span>
+                            <span class="item-teacher">{{item.idteacher}}</span>
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+        <ion-item-options side="end" class="item-function">
+            <ion-item-option color="danger" expandable class="expand-btn delete-btn" (click)='delete(item.id)'>
+                Delete
+            </ion-item-option>
+        </ion-item-options>
+    </ion-item-sliding>
+    <div class="overlay" (click)='closeModalAdd();closeModalEdit()'>
+    </div>
+    <div class="add-modal-box">
+        <ion-text class="modal-header">
+            <p>Phân Lịch</p>
+        </ion-text>
+        <div class="modal">
+            <ion-label class="modal-lb">Id</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Id môn học</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Số lượng sinh viên tối đa</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Thứ</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Tiết bắt đầu</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Tiết kết thúc</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Id Giáo viên</ion-label>
+            <ion-select class="modal-ip" placeholder='chọn giáo viên'>
+                <ion-select-option>a</ion-select-option>
+                <ion-select-option>a</ion-select-option>
+            </ion-select>
+            <ion-label class="modal-lb">Phòng Học</ion-label>
+            <ion-select class="modal-ip" placeholder='chọn phòng'>
+                <ion-select-option>a</ion-select-option>
+                <ion-select-option>a</ion-select-option>
+            </ion-select>
+        </div>
+        <ion-buttons class="modal-btn-group">
+            <ion-button class="modal-btn cancel-btn" (click)='closeModalAdd()'>Hủy</ion-button>
+            <ion-button class="modal-btn add-btn">Thêm</ion-button>
+        </ion-buttons>
+    </div>
+    <div class="edit-modal-box">
+        <ion-text class="modal-header">
+            <p>Chỉnh Sửa thông tin</p>
+        </ion-text>
+        <div class="modal">
+            <ion-label class="modal-lb">Id</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Id môn học</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Số lượng sinh viên tối đa</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Thứ</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Tiết bắt đầu</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Tiết kết thúc</ion-label>
+            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb">Id Giáo viên</ion-label>
+            <ion-select class="modal-ip" placeholder='chọn giáo viên'>
+                <ion-select-option>a</ion-select-option>
+                <ion-select-option>a</ion-select-option>
+            </ion-select>
+            <ion-label class="modal-lb">Phòng Học</ion-label>
+            <ion-select class="modal-ip" placeholder='chọn phòng'>
+                <ion-select-option>a</ion-select-option>
+                <ion-select-option>a</ion-select-option>
+            </ion-select>
+        </div>
+        <ion-buttons class="modal-btn-group">
+            <ion-button class="modal-btn cancel-btn" (click)='closeModalEdit()'>Hủy</ion-button>
+            <ion-button class="modal-btn add-btn">Sửa</ion-button>
+        </ion-buttons>
+    </div>
 </ion-content>

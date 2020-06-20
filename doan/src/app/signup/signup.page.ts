@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FbserviceService} from '../service/fbservice.service'
 import {Router} from '@angular/router'
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class SignupPage implements OnInit {
 
-  constructor( private fbs:FbserviceService, private router:Router, private alertController: AlertController) { }
+  constructor(public loadingController: LoadingController, private fbs:FbserviceService, private router:Router, private alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -18,7 +18,16 @@ export class SignupPage implements OnInit {
   txtuser:any;
   txtpwd:any;
   txtrepwd;
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Đợi một chút',
+      duration: 1000
+    });
+    await loading.present();
 
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
   signup(){
     if(this.txtpwd != this.txtrepwd)
     {
@@ -26,6 +35,7 @@ export class SignupPage implements OnInit {
     }
     else{
       this.SuccessAlert();
+      this.presentLoading();
     }
   }
 

@@ -25,3 +25,24 @@ ion-content {
     margin: 5px 0;
     --padding-start: 15px;
 }
+.disabled {
+    background-color: lightgray;
+    color:white;
+}
+.gv-btn-group {
+    width: 80%;
+    margin:10px auto;
+}
+.gv-btn {
+    width:45%;
+    margin:0 5px;
+    color:white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding:0 10px;
+}
+.gv-reset {
+    background-color: lightgrey;
+}
+.gv-apply {
+    background-color: lightgreen;
+}

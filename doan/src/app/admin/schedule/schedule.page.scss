@@ -1,0 +1,133 @@
+.search-list-teacher {
+    background-color: lightgray;
+    margin: 0 auto;
+    width: 100%;
+    height: 36px;
+    border-radius: 20px;
+}
+.add-icon {
+    width:100%;
+    height:36px;
+}
+.item-options-ios.item-options-end {
+    border:none;
+}
+.each-item:nth-child(odd) > .item-info{
+    background-color: white;
+}
+.each-item:nth-child(odd) > .item-info .item-id{
+    color: lightcoral;
+}
+.each-item:nth-child(odd) > .item-info .item-teacher{
+    color: lightcoral;
+}
+.each-item:nth-child(even) > .item-info{
+    background-color: rgb(154, 166, 189);
+}
+.item-img {
+    width:100%;
+    height:30px;
+    text-align: left;
+}
+.item-name, .item-id, .item-teacher {
+    margin:0;
+}
+.item-name {
+    font-size:14px;
+    color: rgb(0,23,68);
+}
+
+.item-id {
+    font-size: 11px;
+    color:white;
+    margin-right:50px;
+}
+.item-teacher {
+    font-size: 11px;
+    color:white;
+}
+.edit-btn {
+    color:white;
+}
+//alert box
+.overlay {
+    width:100%;
+    height:100%;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: rgba(0,23,68,0.4);
+    z-index:1000;
+    display:none;
+}
+.overlay.active{
+    display:block;
+}   
+.add-modal-box,.edit-modal-box{
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width:90%;
+    height:80%;
+    background-color: whitesmoke;
+    z-index:1001;
+    padding:5px 10px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    border-radius: 10px;
+    font-size:13px;
+    display:none;
+}
+.add-modal-box.active {
+    display:block;
+}
+.edit-modal-box.active {
+    display:block;
+}
+.modal-header {
+    text-align: center;
+}
+.modal-header p {
+    margin:5px auto;
+    font-size:20px;
+    text-transform: uppercase;
+}
+.modal {
+    height:75%;
+    overflow-y: scroll;
+    padding:10px 0;
+}
+.modal-lb {
+    color:rgb(0,23,68,0.5);
+    text-transform: capitalize;
+}
+.modal-ip {
+    background-color: lightgrey;
+    margin:5px auto;
+    width:100%;
+    border-radius:40px;
+    --padding-start: 10px;
+    height:30px;
+}
+.modal-btn-group {
+    align-items: center;
+    margin:10px auto;
+    width:100%;
+}
+.modal-btn {
+    width:42%;
+    margin:0 10px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight: bold;
+}
+.cancel-btn {
+    background-color: lightcoral;
+    color:white;
+}
+.add-btn {
+    background-color: rgb(0,23,68);
+    color:white;
+}

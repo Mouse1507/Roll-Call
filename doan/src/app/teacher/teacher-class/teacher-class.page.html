@@ -14,7 +14,7 @@
       </ion-row>
     </ion-grid>
     <ion-grid class="class-result">
-      <ion-row tappable class="class-info" routerLink='/attendance'>
+      <ion-row tappable class="class-info" routerLink='/attendance' (click) = 'presentLoading()'>
         <ion-col size='3' class="left-info">
           <ion-icon class="icon-class" name="home"></ion-icon>
           <ion-text><p class="no-mar number-class">A202</p></ion-text>

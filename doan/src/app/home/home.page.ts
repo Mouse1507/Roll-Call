@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -6,6 +7,19 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-  
+  constructor(public loadingController: LoadingController) {
+    
+  }
+  oninit() {
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Đợi một chút',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
 }

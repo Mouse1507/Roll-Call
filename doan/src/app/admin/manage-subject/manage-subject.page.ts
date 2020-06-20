@@ -49,7 +49,7 @@ export class ManageSubjectPage implements OnInit {
       ],
       buttons:[
         {
-          text: 'OK'
+          text: 'Đóng'
         }
       ]
     });
@@ -99,14 +99,14 @@ export class ManageSubjectPage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Hủy',
           role: 'cancel',
           cssClass: 'cancel-alert',
           handler: () => {
             console.log('Confirm Cancel');
           }
         }, {
-          text: 'Ok',
+          text: 'Đồng ý',
           handler: (res) => {
             console.log('Confirm Ok');
             this.fbs.Admin_add_object(res.id, res.name, res.tcnumber, res.lsnumber, res.start, res.end).then((mes)=>{

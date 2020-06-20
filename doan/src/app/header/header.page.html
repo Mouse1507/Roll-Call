@@ -4,8 +4,8 @@
       <ion-menu-button menu='main-menu' class="menu-toggle-but"></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      <ion-img tappable routerLink='/home' src='../assets/images/background-main.png' class="app-logo"></ion-img>
-      <ion-text tappable routerLink='/home' class="logo-text">ITC</ion-text>
+      <ion-img tappable (click)='presentLoading()' routerLink='/home' src='../assets/images/background-main.png' class="app-logo"></ion-img>
+      <ion-text tappable (click)='presentLoading()' routerLink='/home' class="logo-text">ITC</ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>

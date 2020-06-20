@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {MenuController} from '@ionic/angular';
@@ -14,7 +14,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private menu: MenuController
+    private menu: MenuController,
+    public loadingController: LoadingController
   ) {
     this.initializeApp();
   }
@@ -27,5 +28,16 @@ export class AppComponent {
   }
   closeMenu() {
     this.menu.close();
+    this.presentLoading();
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Đợi một chút',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 }
