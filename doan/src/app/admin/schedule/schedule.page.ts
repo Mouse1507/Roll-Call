@@ -15,10 +15,10 @@ export class SchedulePage implements OnInit {
   ListSchedule:any
   ngOnInit() {
     this.init()
-    this.fbs.GetFreeTeacher('1', '7', '9').then((res)=>{
-      console.log(res);
+    // this.fbs.GetFreeTeacher('1', '7', '9').then((res)=>{
+    //   console.log(res);
       
-    })
+    // })
     // this.fbs.GetListUsed().then((res)=>{
     //   this.ListRoomFree=[]
     //   this.ListUsed = res

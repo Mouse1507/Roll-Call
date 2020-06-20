@@ -380,52 +380,52 @@ export class FbserviceService {
     })
   }
 ListTeacher
-  GetFreeTeacher(day, lsstart, lsend) {
-    return new Promise((resolve, reject) => {
-      var ListFree = [];
-      var ListSchedule=[];
+  // GetFreeTeacher(day, lsstart, lsend) {
+  //   return new Promise((resolve, reject) => {
+  //     var ListFree = [];
+  //     var ListSchedule=[];
       
-      // this.db.ref('man').orderByChild('uid').once('value').then((res) => {
-      //   var allItem = res.val();
-      //   for (let key in allItem) {
-      //     if (allItem[key].type == 'gv') {
-      //       ListTeacher.push(allItem[key]);
-      //     }
-      //   }
-      // })
-      // console.log(ListTeacher);
-      this.GetListGV().then((res)=>{
-        this.ListTeacher = res
-      })
-      this.db.ref('schedule').orderByChild('uid').once('value').then((res) => {
-        var allItem = res.val();
-        for (let key in allItem) {
-          ListSchedule.push(allItem[key]);
-        }
-        console.log(ListSchedule);
-        // console.log(ListTeacher);
+  //     // this.db.ref('man').orderByChild('uid').once('value').then((res) => {
+  //     //   var allItem = res.val();
+  //     //   for (let key in allItem) {
+  //     //     if (allItem[key].type == 'gv') {
+  //     //       ListTeacher.push(allItem[key]);
+  //     //     }
+  //     //   }
+  //     // })
+  //     // console.log(ListTeacher);
+  //     this.GetListGV().then((res)=>{
+  //       this.ListTeacher = res
+  //     })
+  //     this.db.ref('schedule').orderByChild('uid').once('value').then((res) => {
+  //       var allItem = res.val();
+  //       for (let key in allItem) {
+  //         ListSchedule.push(allItem[key]);
+  //       }
+  //       console.log(ListSchedule);
+  //       // console.log(ListTeacher);
         
-        // ListTeacher.forEach(teacher => {
-        //   console.log(teacher.id);
+  //       // ListTeacher.forEach(teacher => {
+  //       //   console.log(teacher.id);
           
-        //   // var check = true
-        //   // ListSchedule.forEach(element => {
-        //   //   if (element.idteacher == teacher.id && element.day == day ) {
-        //   //     if(  (parseInt(element.lsend) > parseInt(lsstart) && parseInt(element.lsend) <= parseInt(lsend) ) 
-        //   //     || (parseInt(element.lsstart) >= parseInt(lsstart) && parseInt(element.lsstart) < parseInt(lsend) ) ){
-        //   //       check = false
-        //   //     }
-        //   //   }
-        //   // });
-        //   // if(check){
-        //   //   ListFree.push(teacher)
-        //   // }
-        // })
-      // }).then(() => {
-      //   resolve(ListFree)
-      })
-    })
-  }
+  //       //   // var check = true
+  //       //   // ListSchedule.forEach(element => {
+  //       //   //   if (element.idteacher == teacher.id && element.day == day ) {
+  //       //   //     if(  (parseInt(element.lsend) > parseInt(lsstart) && parseInt(element.lsend) <= parseInt(lsend) ) 
+  //       //   //     || (parseInt(element.lsstart) >= parseInt(lsstart) && parseInt(element.lsstart) < parseInt(lsend) ) ){
+  //       //   //       check = false
+  //       //   //     }
+  //       //   //   }
+  //       //   // });
+  //       //   // if(check){
+  //       //   //   ListFree.push(teacher)
+  //       //   // }
+  //       // })
+  //     // }).then(() => {
+  //     //   resolve(ListFree)
+  //     })
+  //   })
+  // }
 
   AddRoom(id, day, start, end) {
     return new Promise((resolve, reject) => {
