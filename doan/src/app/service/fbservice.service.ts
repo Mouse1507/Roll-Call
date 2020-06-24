@@ -572,7 +572,17 @@ export class FbserviceService {
   ////////////////////////////////////////////////////
 
   GetInfoByClass(){
-    
+    return new Promise((resolve, reject)=>{
+      this.db.ref('attendance').orderByChild('uid').once('value').then((res)=>{
+        var list=[]
+        var listattendance
+        listattendance = res.val()
+        for(let key in listattendance){
+          list.push(listattendance[key])
+        }
+        resolve(list)
+      })
+    })
   }
 
   ////////////////////////////////////////////////////
