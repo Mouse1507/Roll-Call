@@ -9,33 +9,23 @@
 
 <ion-content>
   <app-background></app-background>
-  <ion-card class="student-box" tappable (click) ='checkStudent($event)'>
+  <ion-card class="student-box" id='student' tappable (click) ='checkStudent($event, item.idsv)' *ngFor='let item of attendance'>
     <ion-card-header>
       <ion-img src="../assets/images/login-avatar.png" class="student-ava"></ion-img>
     </ion-card-header>
     <ion-card-content class='student-info'>
       <ion-text>
-        <p class="stu stu-name">Nguyễn Văn A</p>
-        <p class="stu stu-id">3001180755</p>
-      </ion-text>
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="student-box" tappable (click) ='checkStudent($event)'>
-    <ion-card-header>
-      <ion-img src="../assets/images/login-avatar.png" class="student-ava"></ion-img>
-    </ion-card-header>
-    <ion-card-content class='student-info'>
-      <ion-text>
-        <p class="stu stu-name">Nguyễn Văn A</p>
-        <p class="stu stu-id">3001180755</p>
+        <p class="stu stu-name">{{item.name}}</p>
+        <p class="stu stu-id">{{item.idsv}}</p>
       </ion-text>
     </ion-card-content>
   </ion-card>
   
+  
 </ion-content>
 <ion-footer>
   <ion-buttons>
-    <ion-button class="end-check-btn">
+    <ion-button class="end-check-btn" (click)='end()'>
       Kết thúc điểm danh
     </ion-button>
   </ion-buttons>

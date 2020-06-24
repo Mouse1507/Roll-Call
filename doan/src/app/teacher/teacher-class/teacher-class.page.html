@@ -14,27 +14,15 @@
       </ion-row>
     </ion-grid>
     <ion-grid class="class-result">
-      <ion-row tappable class="class-info" routerLink='/attendance' (click) = 'presentLoading()'>
+      <ion-row *ngFor='let item of ListShow' tappable class="class-info" routerLink='/attendance/{{item.id}}' (click) = 'presentLoading()'>
         <ion-col size='3' class="left-info">
           <ion-icon class="icon-class" name="home"></ion-icon>
-          <ion-text><p class="no-mar number-class">A202</p></ion-text>
+          <ion-text><p class="no-mar number-class">{{item.room}}</p></ion-text>
         </ion-col>
         <ion-col size='9' class="right-info">
           <ion-text>
-            <p class="no-mar name-class">Lập trình di động </p>
-            <p class="count-class">Sỉ số : 30/30</p>
-          </ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row tappable class="class-info" routerLink='/attendance'>
-        <ion-col size='3' class="left-info">
-          <ion-icon class="icon-class" name="home"></ion-icon>
-          <ion-text><p class="no-mar number-class">A202</p></ion-text>
-        </ion-col>
-        <ion-col size='9' class="right-info">
-          <ion-text>
-            <p class="no-mar name-class">Lập trình di động </p>
-            <p class="count-class">Sỉ số : 30/30</p>
+            <p class="no-mar name-class">{{item.object}}</p>
+            <p class="count-class">Sỉ số : {{item.max}} |  Thứ: {{item.day}} |  start: {{item.start}} |  end: {{item.end}}</p>
           </ion-text>
         </ion-col>
       </ion-row>

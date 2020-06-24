@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import {FbserviceService} from '../../service/fbservice.service';
 
 @Component({
   selector: 'app-manage-class',
@@ -8,9 +9,20 @@ import { AlertController } from '@ionic/angular';
 })
 export class ManageClassPage implements OnInit {
 
-  constructor(public alert: AlertController) { }
+  constructor(public alert: AlertController, private fbs:FbserviceService) { }
 
   ngOnInit() {
+    this.init()
+
+  }
+  ListClass:any
+  init()
+  {
+    this.fbs.GetListClass().then((res)=>{
+      this.ListClass = res;
+      
+    })
+    
   }
   clickBtn(event) {
     document.querySelector('.btn-teacher.active').classList.remove('active');
@@ -19,23 +31,33 @@ export class ManageClassPage implements OnInit {
   async addForm() {
     const alert = await this.alert.create({
       cssClass: 'add-form',
-      header: 'Thêm Thành viên',
+      header: 'Thêm Class',
       inputs: [
+        {
+          name: 'id',
+          type: 'text',
+          placeholder: 'ID class',
+        },
+        {
+          name: 'idobj',
+          type: 'text',
+          placeholder: 'ID môn học',
+        },
+        {
+          name: 'max',
+          type: 'text',
+          placeholder: 'Số lượng sv tối đa',
+        },
+        {
+          name: 'idsv',
+          type: 'text',
+          placeholder: 'ID Sinh viên',
+        },
         {
           name: 'name',
           type: 'text',
-          placeholder: 'họ và tên',
-        },
-        {
-          name: 'password',
-          type: 'text',
-          placeholder: 'mật khẩu',
-        },
-        {
-          name: 'email',
-          type: 'text',
-          placeholder: 'email',
-        },
+          placeholder: 'Tên sv',
+        }
       ],
       buttons: [
         {
@@ -47,8 +69,11 @@ export class ManageClassPage implements OnInit {
           }
         }, {
           text: 'Đồng ý',
-          handler: () => {
-            console.log('Confirm Ok');
+          handler: (res) => {
+            this.fbs.Admin_add_class(res.id, res.idobj, res.max, res.idsv, res.name).then((mes)=>{
+              console.log(mes);
+              this.init()
+            })
           }
         }
       ]
@@ -56,42 +81,80 @@ export class ManageClassPage implements OnInit {
 
     await alert.present();
   }
-  async editForm() {
+
+  async showInfo(item)
+  {
+    // var students=[]
+    // item.list.forEach(element => {
+    //   {
+    //     students.push(element)
+    //   }
+    // })
     const alert = await this.alert.create({
-      cssClass: 'edit-form',
-      header: 'Thay đổi thông tin',
-      inputs: [
+      header: 'Infor',
+      inputs:[
         {
-          name: 'name',
-          type: 'text',
-          placeholder: 'họ và tên',
+          disabled:true,
+          value: 'ID: '+ item.property.id
         },
         {
-          name: 'id',
-          type: 'text',
-          placeholder: 'id',
+          disabled:true,
+          value: 'ID môn học: '+ item.property.idobj
+        },
+        {
+          disabled:true,
+          value: 'Số lượng tối đa: '+ item.property.max
+        },
+        {
+          disabled:true,
+          value: 'DS sv: '+ item.list
         },
       ],
-      buttons: [
+      buttons:[
         {
-          text: 'Hủy bỏ',
-          role: 'cancel',
-          cssClass: 'cancel-alert',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Đồng ý',
-          handler: () => {
-            console.log('Confirm Ok');
-          }
+          text: 'Đóng'
         }
       ]
     });
-
     await alert.present();
   }
-  async delete() {
+
+  // async editForm() {
+  //   const alert = await this.alert.create({
+  //     cssClass: 'edit-form',
+  //     header: 'Thay đổi thông tin',
+  //     inputs: [
+  //       {
+  //         name: 'name',
+  //         type: 'text',
+  //         placeholder: 'họ và tên',
+  //       },
+  //       {
+  //         name: 'id',
+  //         type: 'text',
+  //         placeholder: 'id',
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Hủy bỏ',
+  //         role: 'cancel',
+  //         cssClass: 'cancel-alert',
+  //         handler: () => {
+  //           console.log('Confirm Cancel');
+  //         }
+  //       }, {
+  //         text: 'Đồng ý',
+  //         handler: () => {
+  //           console.log('Confirm Ok');
+  //         }
+  //       }
+  //     ]
+  //   });
+
+  //   await alert.present();
+  // }
+  async delete(id) {
     const alert = await this.alert.create({
       header :'Bạn có muốn xóa không',
       subHeader :'Bạn sẽ không thể khôi phục thao tác này',
@@ -107,7 +170,10 @@ export class ManageClassPage implements OnInit {
         {
           text: 'Đồng ý',
           handler: () => {
-            console.log('Confirm Ok');
+            this.fbs.Admin_delete_class(id).then((mes)=>{
+              console.log(mes);
+              this.init()
+            })
           }
         }
       ]

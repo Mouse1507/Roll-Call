@@ -14,13 +14,13 @@
     <ion-item-sliding *ngFor='let item of ListSchedule' class="each-item">
         <ion-item-options side="start" class="item-function">
             <ion-item-option color="medium" expandable class="expand-btn edit-btn"
-                (click)='openModalEdit()'>
+                (click)='openModalEdit(item)'>
                 Edit
             </ion-item-option>
         </ion-item-options>
         <ion-item class="item-info">
             <ion-grid tappable
-                (click)='showInfo(item.id, item.idobj, item.idteacher, item.max, item.day, item.lsstart, item.lsend, item.room)'>
+                (click)='showInfo(item)'>
                 <ion-row>
                     <ion-col size='3'>
                         <ion-img src='../assets/images/login-avatar.png' class="item-img"></ion-img>
@@ -28,7 +28,7 @@
                     <ion-col size='9'>
                         <ion-text>
                             <p class="item-name">{{item.id}}</p>
-                            <span class="item-id">{{item.idobj}}</span>
+                            <span class="item-id">{{item.idclass}}</span>
                             <span class="item-teacher">{{item.idteacher}}</span>
                         </ion-text>
                     </ion-col>
@@ -48,32 +48,30 @@
             <p>Phân Lịch</p>
         </ion-text>
         <div class="modal">
-            <ion-label class="modal-lb">Id</ion-label>
-            <ion-input class="modal-ip"></ion-input>
-            <ion-label class="modal-lb">Id môn học</ion-label>
-            <ion-input class="modal-ip"></ion-input>
-            <ion-label class="modal-lb">Số lượng sinh viên tối đa</ion-label>
-            <ion-input class="modal-ip"></ion-input>
+            <ion-label class="modal-lb" >Id</ion-label>
+            <ion-input class="modal-ip" [(ngModel)]='txtID'></ion-input>
+            <ion-label class="modal-lb">ID Class</ion-label>
+            <ion-select class="modal-ip"  [(ngModel)]='txtIDClass' placeholder='chọn lớp'>
+                <ion-select-option *ngFor='let item of ListClass'>{{item.property.id}}</ion-select-option>
+            </ion-select>
             <ion-label class="modal-lb">Thứ</ion-label>
-            <ion-input class="modal-ip"></ion-input>
+            <ion-input class="modal-ip" [(ngModel)]='txtDay'></ion-input>
             <ion-label class="modal-lb">Tiết bắt đầu</ion-label>
-            <ion-input class="modal-ip"></ion-input>
+            <ion-input class="modal-ip" [(ngModel)]='txtStart'></ion-input>
             <ion-label class="modal-lb">Tiết kết thúc</ion-label>
-            <ion-input class="modal-ip"></ion-input>
+            <ion-input class="modal-ip" [(ngModel)]='txtEnd' (change)='getList(txtDay, txtStart, txtEnd)'></ion-input>
             <ion-label class="modal-lb">Id Giáo viên</ion-label>
-            <ion-select class="modal-ip" placeholder='chọn giáo viên'>
-                <ion-select-option>a</ion-select-option>
-                <ion-select-option>a</ion-select-option>
+            <ion-select class="modal-ip"  [(ngModel)]='txtGV' placeholder='chọn giáo viên'>
+                <ion-select-option *ngFor='let item of ListGVFree'>{{item.id}}</ion-select-option>
             </ion-select>
             <ion-label class="modal-lb">Phòng Học</ion-label>
-            <ion-select class="modal-ip" placeholder='chọn phòng'>
-                <ion-select-option>a</ion-select-option>
-                <ion-select-option>a</ion-select-option>
+            <ion-select class="modal-ip"  [(ngModel)]='txtRoom' placeholder='chọn phòng'>
+                <ion-select-option *ngFor='let item of ListRoomFree'>{{item}}</ion-select-option>
             </ion-select>
         </div>
         <ion-buttons class="modal-btn-group">
             <ion-button class="modal-btn cancel-btn" (click)='closeModalAdd()'>Hủy</ion-button>
-            <ion-button class="modal-btn add-btn">Thêm</ion-button>
+            <ion-button class="modal-btn add-btn" (click)='Add()'>Thêm</ion-button>
         </ion-buttons>
     </div>
     <div class="edit-modal-box">
@@ -81,32 +79,32 @@
             <p>Chỉnh Sửa thông tin</p>
         </ion-text>
         <div class="modal">
-            <ion-label class="modal-lb">Id</ion-label>
-            <ion-input class="modal-ip"></ion-input>
-            <ion-label class="modal-lb">Id môn học</ion-label>
-            <ion-input class="modal-ip"></ion-input>
-            <ion-label class="modal-lb">Số lượng sinh viên tối đa</ion-label>
-            <ion-input class="modal-ip"></ion-input>
+            <!-- <ion-label class="modal-lb" >Id</ion-label>
+            <ion-input class="modal-ip" [(ngModel)]='txtID1'></ion-input> -->
+            <ion-label class="modal-lb">Class</ion-label>
+            <ion-select class="modal-ip"  [(ngModel)]='txtIDClass' placeholder='chọn lớp' value='{{txtIDClass2}}'>
+                <ion-select-option *ngFor='let item of ListClass'>{{item.property.id}}</ion-select-option>
+            </ion-select>
+            <!-- <ion-label class="modal-lb">Id môn học</ion-label>
+            <ion-input class="modal-ip" [(ngModel)]='txtIDObj'></ion-input> -->
             <ion-label class="modal-lb">Thứ</ion-label>
-            <ion-input class="modal-ip"></ion-input>
-            <ion-label class="modal-lb">Tiết bắt đầu</ion-label>
-            <ion-input class="modal-ip"></ion-input>
+            <ion-input class="modal-ip" [(ngModel)]='txtDay1' value='{{txtDay2}}'></ion-input>
+            <ion-label class="modal-lb">Tiết bắt đầu </ion-label>
+            <ion-input class="modal-ip" [(ngModel)]='txtStart1' value='{{txtStart2}}'></ion-input>
             <ion-label class="modal-lb">Tiết kết thúc</ion-label>
-            <ion-input class="modal-ip"></ion-input>
+            <ion-input class="modal-ip" [(ngModel)]='txtEnd1' (change)='getList(txtDay, txtStart, txtEnd)' value='{{txtEnd2}}'></ion-input>
             <ion-label class="modal-lb">Id Giáo viên</ion-label>
-            <ion-select class="modal-ip" placeholder='chọn giáo viên'>
-                <ion-select-option>a</ion-select-option>
-                <ion-select-option>a</ion-select-option>
+            <ion-select class="modal-ip"  [(ngModel)]='txtGV1' placeholder='chọn giáo viên'>
+                <ion-select-option *ngFor='let item of ListGVFree'>{{item.id}}</ion-select-option>
             </ion-select>
             <ion-label class="modal-lb">Phòng Học</ion-label>
-            <ion-select class="modal-ip" placeholder='chọn phòng'>
-                <ion-select-option>a</ion-select-option>
-                <ion-select-option>a</ion-select-option>
+            <ion-select class="modal-ip"  [(ngModel)]='txtRoom1' placeholder='chọn phòng'>
+                <ion-select-option *ngFor='let item of ListRoomFree'>{{item}}</ion-select-option>
             </ion-select>
         </div>
         <ion-buttons class="modal-btn-group">
             <ion-button class="modal-btn cancel-btn" (click)='closeModalEdit()'>Hủy</ion-button>
-            <ion-button class="modal-btn add-btn">Sửa</ion-button>
+            <ion-button class="modal-btn add-btn" (click)='Edit()'>Sửa</ion-button>
         </ion-buttons>
     </div>
 </ion-content>

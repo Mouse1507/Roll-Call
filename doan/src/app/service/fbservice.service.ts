@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 // import { resolve } from 'dns';
@@ -40,8 +40,10 @@ export class FbserviceService {
 
   GetCurrentUser() {
     return new Promise<any>((resolve, reject) => {
-      var user = firebase.auth().currentUser;
-      resolve(user);
+      var user = firebase.auth().onAuthStateChanged((user)=>{
+        resolve(user)
+      })
+      
     })
   }
 
@@ -324,7 +326,60 @@ export class FbserviceService {
   }
 
   /////////////////////////////////////////////////////
+  GetListClass() {
+    return new Promise((resolve, reject) => {
+      var list = [];
+      this.db.ref('class').orderByChild('uid').once('value').then((res) => {
+        var allItem = res.val();
+        for (let key in allItem) {
+          list.push(allItem[key]);
+        }
+      }).then(() => {
+        resolve(list);
+      })
+    })
+  }
 
+  Admin_add_class(id, idobj, max, idsv, name) {
+    return new Promise((resolve, reject) => {
+      this.db.ref('class/' + id + '/property').set({
+        id: id,
+        idobj: idobj,
+        max: max
+      })
+      this.db.ref('class/' + id + '/list').push({
+        idsv: idsv,
+        name: name
+      }).then(()=>{
+        resolve('successful add sv ' + name + ' to class '+ id)
+      })
+    })
+  }
+
+  Admin_delete_class(id) {
+    return new Promise((resolve, reject) => {
+      this.db.ref('class/' + id).remove().then(() => {
+        resolve('Successfull Deleted object: ' + id);
+      })
+    })
+  }
+  
+  // Admin_update_class(id, idobj, max, idsv, name) {
+  //   return new Promise((resolve, reject) => {
+  //     this.db.ref('class/' + id + '/property').set({
+  //       id: id,
+  //       idobj: idobj,
+  //       max: max
+  //     })
+  //     this.db.ref('class/' + id + '/list').push({
+  //       idsv: idsv,
+  //       name: name
+  //     }).then(()=>{
+  //       resolve('successful add sv ' + name + ' to class '+ id)
+  //     })
+  //   })
+  // }
+  ////////////////////////////////////////////////////
   GetListSchedule() {
     return new Promise((resolve, reject) => {
       var list = [];
@@ -338,13 +393,12 @@ export class FbserviceService {
       })
     })
   }
-  Admin_add_schedule(id, idobj, idteacher, max, day, lsstart, lsend, room) {
+  Admin_add_schedule(id, idclass, idteacher, day, lsstart, lsend, room) {
     return new Promise((resolve, reject) => {
       this.db.ref('schedule/' + id).set({
         id: id,
-        idobj: idobj,
+        idclass: idclass,
         idteacher: idteacher,
-        max: max,
         day: day,
         lsstart: lsstart,
         lsend: lsend,
@@ -352,9 +406,14 @@ export class FbserviceService {
       }).then(() => {
         resolve('Successfull Added Schedule: ' + id);
       })
+      this.db.ref('room').push({
+        id: room,
+        day: day,
+        start: lsstart,
+        end: lsend
+      })
     })
   }
-
   Admin_delete_schedule(id) {
     return new Promise((resolve, reject) => {
       this.db.ref('schedule/' + id).remove().then(() => {
@@ -363,13 +422,12 @@ export class FbserviceService {
     })
   }
 
-  Admin_update_schedule(id, idobj, idteacher, max, day, lsstart, lsend, room) {
+  Admin_update_schedule(id, idclass, idteacher, day, lsstart, lsend, room) {
     return new Promise((resolve, reject) => {
-      this.db.ref('object/' + id).set({
+      this.db.ref('schedule/' + id).set({
         id: id,
-        idobj: idobj,
+        idclass: idclass,
         idteacher: idteacher,
-        max: max,
         day: day,
         lsstart: lsstart,
         lsend: lsend,
@@ -379,53 +437,53 @@ export class FbserviceService {
       })
     })
   }
-ListTeacher
-  // GetFreeTeacher(day, lsstart, lsend) {
-  //   return new Promise((resolve, reject) => {
-  //     var ListFree = [];
-  //     var ListSchedule=[];
-      
-  //     // this.db.ref('man').orderByChild('uid').once('value').then((res) => {
-  //     //   var allItem = res.val();
-  //     //   for (let key in allItem) {
-  //     //     if (allItem[key].type == 'gv') {
-  //     //       ListTeacher.push(allItem[key]);
-  //     //     }
-  //     //   }
-  //     // })
-  //     // console.log(ListTeacher);
-  //     this.GetListGV().then((res)=>{
-  //       this.ListTeacher = res
-  //     })
-  //     this.db.ref('schedule').orderByChild('uid').once('value').then((res) => {
-  //       var allItem = res.val();
-  //       for (let key in allItem) {
-  //         ListSchedule.push(allItem[key]);
-  //       }
-  //       console.log(ListSchedule);
-  //       // console.log(ListTeacher);
-        
-  //       // ListTeacher.forEach(teacher => {
-  //       //   console.log(teacher.id);
+
+  Test(id, max, start, end, idsv, name)
+  {
+    this.db.ref('class/'+id+'/property').set({
+      max: max,
+      start: start,
+      end: end
+    })
+    this.db.ref('class/'+id+'/list').push({
+      idsv: idsv,
+      name: name
+    })
+  }
+
+  GetFreeTeacher(day, lsstart, lsend) {
+    return new Promise((resolve, reject) => {
+      var ListFree = [];
+      var ListSchedule
+      var ListTeacher
+
+      this.GetListGV().then((res)=>{
+        ListTeacher = res
+        this.GetListSchedule().then((res)=>{
+          ListSchedule = res
           
-  //       //   // var check = true
-  //       //   // ListSchedule.forEach(element => {
-  //       //   //   if (element.idteacher == teacher.id && element.day == day ) {
-  //       //   //     if(  (parseInt(element.lsend) > parseInt(lsstart) && parseInt(element.lsend) <= parseInt(lsend) ) 
-  //       //   //     || (parseInt(element.lsstart) >= parseInt(lsstart) && parseInt(element.lsstart) < parseInt(lsend) ) ){
-  //       //   //       check = false
-  //       //   //     }
-  //       //   //   }
-  //       //   // });
-  //       //   // if(check){
-  //       //   //   ListFree.push(teacher)
-  //       //   // }
-  //       // })
-  //     // }).then(() => {
-  //     //   resolve(ListFree)
-  //     })
-  //   })
-  // }
+          ListTeacher.forEach(teacher => {
+            var check = true
+            ListSchedule.forEach(element => {
+              if (element.idteacher == teacher.id && element.day == day ) {
+                if(  (parseInt(element.lsend) > parseInt(lsstart) && parseInt(element.lsend) <= parseInt(lsend) ) 
+                || (parseInt(element.lsstart) >= parseInt(lsstart) && parseInt(element.lsstart) < parseInt(lsend) ) ){
+                  check = false
+                }
+              }
+            });
+            if(check){
+              ListFree.push(teacher)
+            }
+          });
+        })
+        
+      }).then(()=>{
+        resolve(ListFree)
+      })
+    })
+  }
+  
 
   AddRoom(id, day, start, end) {
     return new Promise((resolve, reject) => {
@@ -484,7 +542,38 @@ ListTeacher
       })
     })
   }
+  ///////////////////////////////////////////////////
+  GetListStudentInClass(id){
+    return new Promise((resolve, reject)=>{
+      this.GetListClass().then((res)=>{
+        var list
+        list = res
+        var listStudent =[]
+        list.forEach(element => {
+          if(element.property.id == id)
+          {
+            for(let key in element.list){
+              listStudent.push(element.list[key])
+            }
+          }
+        });
+        resolve(listStudent)
+      })
+    })
+  }
 
+  Add_Attendance(id, date, students){
+    this.db.ref('attendance/'+id+'-'+date).set({
+      id: id,
+      date: date,
+      students: students
+    })
+  }
+  ////////////////////////////////////////////////////
+
+  GetInfoByClass(){
+    
+  }
 
   ////////////////////////////////////////////////////
   GetItem() {

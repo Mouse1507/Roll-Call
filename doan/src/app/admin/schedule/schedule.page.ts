@@ -11,62 +11,83 @@ export class SchedulePage implements OnInit {
 
   constructor(public alert: AlertController, private fbs:FbserviceService) { }
   ListUsed: any
-  ListRoomFree: any
   ListSchedule:any
+  ListObject:any
+  ListClass:any
   ngOnInit() {
     this.init()
-    // this.fbs.GetFreeTeacher('1', '7', '9').then((res)=>{
-    //   console.log(res);
+  }
+  
+
+  ListGVFree:any
+  ListRoomFree:any
+  getList(day, start, end){
+    this.fbs.GetFreeTeacher(day, start, end).then((res)=>{
+      this.ListGVFree = res
       
-    // })
-    // this.fbs.GetListUsed().then((res)=>{
-    //   this.ListRoomFree=[]
-    //   this.ListUsed = res
-    //   this.ListRoom.forEach(room => {
-    //     var check = true
-    //     this.ListUsed.forEach(element => {
-          // if ( element.id == room && element.day == this.day) {
-          //   if(( (parseInt(element.end) > parseInt(this.lsstart) && parseInt(element.end) <= parseInt(this.lsend)) 
-          //   || (parseInt(element.start) >= parseInt(this.lsstart) && parseInt(element.start) < parseInt(this.lsend)) )){
-          //     check = false
-          //   }
-          // }
-    //       console.log('check ne:' +check + '    end:' + element.end);
-          
-    //     });
-        // if(check){
-        //   this.ListRoomFree.push(room)
-        // }
-    //   })
-    //   console.log(this.ListRoomFree);
+    })
+    this.fbs.GetRoomFree(day, start, end).then((res)=>{
+      this.ListRoomFree = res
       
-    // })
+    })
+  }
+  txtID:any
+  txtIDClass:any
+  txtDay:any
+  txtStart:any
+  txtEnd:any
+  txtGV:any
+  txtRoom:any
+  Add(){
+    console.log(this.txtID, this.txtIDClass, this.txtDay, this.txtStart, this.txtEnd, this.txtGV, this.txtRoom);
     
+    this.fbs.Admin_add_schedule(this.txtID, this.txtIDClass, this.txtGV, this.txtDay, this.txtStart, this.txtEnd, this.txtRoom).then((res)=>{
+      console.log(res);
+      document.querySelector('.overlay').classList.remove('active');
+      document.querySelector('.add-modal-box').classList.remove('active');
+      this.init();
+    })
+  }
+  txtIDClass1:any
+  txtDay1:any
+  txtStart1:any
+  txtEnd1:any
+  txtGV1:any
+  txtRoom1:any
+  IDedit:any
+  txtDay2:any
+  txtStart2:any
+  txtEnd2:any
+  txtIDClass2:any
+  Edit(){
+    this.fbs.Admin_update_schedule(this.IDedit, this.txtIDClass, this.txtGV1, this.txtDay1, this.txtStart1, this.txtEnd1, this.txtRoom1).then((res)=>{
+      console.log(res);
+      document.querySelector('.overlay').classList.remove('active');
+      document.querySelector('.edit-modal-box').classList.remove('active');
+      this.init()
+    })
     
     
   }
 
-  async showInfo(id, idobj, idteacher, max, day, lsstart, lsend, room)
+  async showInfo(item)
   {
-    var dayy = parseInt(day)+1;
+    
+    var dayy = parseInt(item.day)+1;
     const alert = await this.alert.create({
       header: 'Infor',
       inputs:[
         {
           disabled:true,
-          value: 'ID: '+ id
+          value: 'ID: '+ item.id
         },
         {
           disabled:true,
-          value: 'ID mon hoc: '+ idobj
+          value: 'ID class: '+ item.idclass
         },
         {
           disabled:true,
-          value: 'ID giao vien : '+ idteacher
-        },
-        {
-          disabled:true,
-          value: 'So luong toi da : '+ max
+          value: 'ID giao vien : '+ item.idteacher
         },
         {
           disabled:true,
@@ -74,15 +95,15 @@ export class SchedulePage implements OnInit {
         },
         {
           disabled:true,
-          value: 'Tiet bat dau: '+ lsstart
+          value: 'Tiet bat dau: '+ item.lsstart
         },
         {
           disabled:true,
-          value: 'Tiet ket thuc: '+ lsend
+          value: 'Tiet ket thuc: '+ item.lsend
         },
         {
           disabled:true,
-          value: 'Phong hoc: '+ room
+          value: 'Phong hoc: '+ item.room
         },
       ],
       buttons:[
@@ -97,6 +118,9 @@ export class SchedulePage implements OnInit {
   {
     this.fbs.GetListSchedule().then((res)=>{
       this.ListSchedule = res;
+      this.fbs.GetListClass().then((res)=>{
+        this.ListClass = res
+      })
     })
   }
   // async addForm() {
@@ -252,7 +276,7 @@ export class SchedulePage implements OnInit {
           text: 'Đồng ý',
           handler: () => {
             console.log('Confirm Ok');
-            this.fbs.Admin_delete_object(id).then((mes)=>{
+            this.fbs.Admin_delete_schedule(id).then((mes)=>{
               console.log(mes);
               this.init()
             })
@@ -278,10 +302,14 @@ export class SchedulePage implements OnInit {
     document.querySelector('.overlay').classList.remove('active');
     document.querySelector('.add-modal-box').classList.remove('active');
   }
-  openModalEdit() {
+  openModalEdit(item) {
     document.querySelector('.overlay').classList.add('active');
     document.querySelector('.edit-modal-box').classList.add('active');
-
+    this.IDedit = item.id
+    this.txtDay2 = item.day
+    this.txtStart2 = item.lsstart
+    this.txtEnd2 = item.lsend
+    this.txtIDClass2 = item.idclass
   }
   closeModalEdit() {
     document.querySelector('.overlay').classList.remove('active');

@@ -36,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./roll-call/roll-call.module').then( m => m.RollCallPageModule)
   },
   {
-    path: 'attendance',
+    path: 'attendance/:id',
     loadChildren: () => import('./attendance/attendance.module').then( m => m.AttendancePageModule)
   },
   {
