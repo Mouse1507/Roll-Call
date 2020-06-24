@@ -11,9 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import {environment} from '../environments/environment'
 import {AngularFireModule} from '@angular/fire';
 import * as firebase from 'firebase/app';
-import { AngularFireStorageModule } from '@angular/fire/storage'
-import { AngularFireDatabaseModule } from '@angular/fire/database'
-import {AngularFireAuthModule} from '@angular/fire/auth'
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
