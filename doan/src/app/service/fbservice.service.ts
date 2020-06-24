@@ -569,6 +569,21 @@ export class FbserviceService {
       students: students
     })
   }
+
+  GetCountbyIDandDay(id, day){
+    return new Promise((resolve, reject)=>{
+      this.db.ref('attendance').orderByChild('uid').once('value').then((res)=>{
+        var allItem= res.val()
+        var list = []
+        for(let key in allItem){
+          if(allItem[key].id == id && allItem[key].date == day){
+            list.push(allItem[key].students)
+          }
+        }
+        resolve(list)
+      })
+    })
+  }
   ////////////////////////////////////////////////////
 
   GetInfoByClass(){

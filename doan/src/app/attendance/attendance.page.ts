@@ -44,7 +44,7 @@ export class AttendancePage implements OnInit {
     var date = new Date().getDate()
     var month = new Date().getMonth()
     var year = new Date().getFullYear()
-    var DATE = date +'/'+month+'/'+year
+    var DATE = date +'-'+month+'-'+year
     this.fbs.Add_Attendance(this.ID, DATE, this.attendance)
     this.router.navigateByUrl('teacher/class')
   }
