@@ -8,20 +8,6 @@ const routes: Routes = [
   {
     path: '',
     component: CtsvPage,
-    children: [
-      {
-        path: 'ctrl-class',
-        loadChildren: () => import('./ctrl-class/ctrl-class.module').then( m => m.CtrlClassPageModule)
-      },
-      {
-        path: 'ctrl-subject',
-        loadChildren: () => import('./ctrl-subject/ctrl-subject.module').then( m => m.CtrlSubjectPageModule)
-      },
-      {
-        path: '',
-        loadChildren: () => import('./ctrl-class/ctrl-class.module').then( m => m.CtrlClassPageModule)
-      }
-    ]
   },
   {
     path: 'home',
