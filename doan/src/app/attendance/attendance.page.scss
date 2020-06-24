@@ -6,6 +6,7 @@ ion-content{
     text-align: center;
 }
 .student-box {
+    position: relative;
     width:40%;
     margin: 10px;
     background-color:lightslategray;
@@ -49,4 +50,13 @@ ion-content{
     color:white;
     border-radius: 20px;
     border: 2px solid lightslategray;
+}
+// check box
+.checkbox {
+    position: absolute;
+    top:10px; 
+    right:10px;
+}
+.checkbox-ip {
+    --size: 20px;
 }

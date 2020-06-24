@@ -43,7 +43,7 @@ ion-tabs ion-tab-bar {
     border-radius: 20px;
     padding:0;
     height:36px!important;
-    margin-bottom: 5px;
+    margin: 5px auto;
 }
 .table-title {
     font-size:12px;
@@ -75,4 +75,20 @@ ion-tabs ion-tab-bar {
 }
 .table-content:nth-child(even){
     background-color: white;
+}
+// filter
+.filter-bar {
+    --ion-grid-padding:0;
+}
+.filter-bar ion-col {
+    --ion-grid-column-padding:0;
+}
+.time-pick {
+    padding-top:15px;
+    height:36px;
+    width:90%;
+    border-bottom: 1px solid white;
+    text-align: center;
+    margin:5px auto 5px auto;
+    color:lightcoral;
 }
