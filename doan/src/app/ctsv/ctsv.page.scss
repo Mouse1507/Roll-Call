@@ -6,49 +6,26 @@
     background-color: rgba(0, 23, 68,0.7);
     height:100%;
 }
+.btn-teacher {
+    width:100%;
+    margin:0 auto;
+    color:white;
+    background-color: inherit;
+    font-size:15px;
+}
+.btn-teacher.active {
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    color:red;
+    background-color:white;
+}
 .menu-toggle-but {
     color: rgba(0, 23, 68);
 }
+ion-tabs ion-tab-bar {
+    background-color: transparent;
+}
 .log-out-icon {
     color:rgba(0, 23, 68);
-}
-// 
-.search-bar {
-    border:2px solid #001744;
-    background-color: lightgray;
-    border-radius: 20px;
-    padding:0;
-    height:36px!important;
-    margin-bottom: 5px;
-}
-.table-title {
-    font-size:12px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color:white;
-}
-.table-header{
-    font-size:12px;
-    font-weight: bold;
-    background-color: black;
-    color:white;
-}
-.class-name, .class-id {
-    margin:0;
-    text-align: left;
-}
-.class-name {
-    font-size:12px;
-    font-weight: bold;
-    text-transform: capitalize;;
-}
-.class-id {
-    font-size: 10px;
-    color:lightslategrey;
-}
-.table-content:nth-child(odd){
-    background-color: lightsteelblue;
-}
-.table-content:nth-child(even){
-    background-color: white;
 }
