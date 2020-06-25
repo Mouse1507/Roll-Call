@@ -7,6 +7,21 @@
 .icon-inner {
     display:none;
 }
-.loading-wrapper.sc-ion-loading-ios {
+.loading-wrapper.sc-ion-loading-ios, .loading-wrapper.sc-ion-loading-md {
     background-color:white;
+}
+.searchbar-input.sc-ion-searchbar-md,.searchbar-input.sc-ion-searchbar-ios {
+    border:2px solid #001744;
+    background-color: lightgray;
+    border-radius: 20px;
+    padding-left:40px;
+    width:100%;
+    color:white;
+    height:36px;
+}
+.searchbar-search-icon.sc-ion-searchbar-md,.searchbar-search-icon.sc-ion-searchbar-ios {
+    top:6px;
+}
+.searchbar-clear-button.sc-ion-searchbar-md,.searchbar-clear-button.sc-ion-searchbar-ios {
+    color:white;
 }

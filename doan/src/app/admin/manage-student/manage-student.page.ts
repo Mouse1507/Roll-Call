@@ -170,4 +170,16 @@ export class ManageStudentPage implements OnInit {
     })
     await alert.present();
   }
+  filterSearch(searchBar) {
+    var value = searchBar.currentTarget.value.toUpperCase();
+    if (!value) {
+      this.init();
+      return;
+    }
+    this.ListSV = this.ListSV.filter(grid => {
+      if (grid.name || value) {
+        return grid.name.toUpperCase().indexOf(value) > -1;
+      }
+    });
+  }
 }

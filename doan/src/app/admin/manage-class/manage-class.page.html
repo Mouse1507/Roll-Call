@@ -1,8 +1,8 @@
 <ion-content>
-  <ion-grid>
+  <ion-grid class="filter-row">
       <ion-row>
           <ion-col size="10">
-              <ion-searchbar class="search-list-teacher"></ion-searchbar>
+              <ion-searchbar class="search-list-teacher" (ionChange)="filterSearch($event)"></ion-searchbar>
           </ion-col>
           <ion-col size="2">
               <ion-icon tappable name="person-add-sharp" size='large' class="add-icon" (click) = 'addForm()'></ion-icon>
@@ -10,7 +10,7 @@
       </ion-row>
   </ion-grid>
 
-  <ion-item-sliding *ngFor='let item of ListClass' class="each-item">
+  <ion-item-sliding *ngFor="let item of ListClass" class="each-item">
       <ion-item-options side="start" class="item-function">
           <ion-item-option color="medium" expandable class="expand-btn edit-btn" >
               Edit

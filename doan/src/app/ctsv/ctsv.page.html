@@ -13,10 +13,10 @@
   <div class="content-box">
     <ion-grid class="filter-bar">
       <ion-row>
-        <ion-col>
-          <ion-searchbar class="search-bar"></ion-searchbar>
+        <ion-col size='7'>
+          <ion-searchbar class="search-bar" (ionChange)='filterSearch($event)'></ion-searchbar>
         </ion-col>
-        <ion-col>
+        <ion-col size='5'>
           <ion-datetime class="time-pick" displayFormat="DD/MM/YYYY" placeholder="Chọn Ngày"></ion-datetime>
         </ion-col>
       </ion-row>
@@ -37,8 +37,8 @@
             <ion-col size='2'>{{i+1}}</ion-col>
             <ion-col size='8'>
                 <ion-text>
-                    <p class="class-name">{{item.name}}</p>
-                    <p class="class-id">{{item.id}}</p>
+                    <p class="class-name" id="{{item.name}}">{{item.name}}</p>
+                    <p class="class-id" id="{{item.id}}">{{item.id}}</p>
                 </ion-text>
             </ion-col>
             <ion-col size='2'>

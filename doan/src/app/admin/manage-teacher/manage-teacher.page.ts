@@ -194,5 +194,16 @@ export class ManageTeacherPage implements OnInit {
     })
     await alert.present();
   }
-  
+  filterSearch(searchBar) {
+    var value = searchBar.currentTarget.value.toUpperCase();
+    if (!value) {
+      this.init();
+      return;
+    }
+    this.ListGV = this.ListGV.filter(grid => {
+      if (grid.name || value) {
+        return grid.name.toUpperCase().indexOf(value) > -1;
+      }
+    });
+  }
 }

@@ -220,4 +220,16 @@ export class ManageSubjectPage implements OnInit {
     })
     await alert.present();
   }
+  filterSearch(searchBar) {
+    var value = searchBar.currentTarget.value.toUpperCase();
+    if (!value) {
+      this.init();
+      return;
+    }
+    this.ListOBJ = this.ListOBJ.filter(grid => {
+      if (grid.name || value) {
+        return grid.name.toUpperCase().indexOf(value) > -1;
+      }
+    });
+  }
 }

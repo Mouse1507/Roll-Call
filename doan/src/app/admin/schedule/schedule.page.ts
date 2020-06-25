@@ -315,4 +315,16 @@ export class SchedulePage implements OnInit {
     document.querySelector('.overlay').classList.remove('active');
     document.querySelector('.edit-modal-box').classList.remove('active');
   }
+  filterSearch(searchBar) {
+    var value = searchBar.currentTarget.value.toUpperCase();
+    if (!value) {
+      this.init();
+      return;
+    }
+    this.ListSchedule = this.ListSchedule.filter(grid => {
+      if (grid.id || value) {
+        return grid.id.toUpperCase().indexOf(value) > -1;
+      }
+    });
+  }
 }

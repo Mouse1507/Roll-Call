@@ -103,5 +103,17 @@ export class CtsvPage implements OnInit {
       })
     })
   }
+  filterSearch(searchBar) {
+    var value = searchBar.currentTarget.value.toUpperCase();
+    if (!value) {
+      this.init();
+      return;
+    }
+    this.ListShow = this.ListShow.filter(grid => {
+      if (grid.name || value) {
+        return grid.name.toUpperCase().indexOf(value) > -1;
+      }
+    });
+  }
 }
 

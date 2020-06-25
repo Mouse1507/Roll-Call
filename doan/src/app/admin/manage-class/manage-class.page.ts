@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import {FbserviceService} from '../../service/fbservice.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  AlertController
+} from '@ionic/angular';
+import {
+  FbserviceService
+} from '../../service/fbservice.service';
 
 @Component({
   selector: 'app-manage-class',
@@ -9,20 +16,19 @@ import {FbserviceService} from '../../service/fbservice.service';
 })
 export class ManageClassPage implements OnInit {
 
-  constructor(public alert: AlertController, private fbs:FbserviceService) { }
+  constructor(public alert: AlertController, private fbs: FbserviceService) {}
 
   ngOnInit() {
     this.init()
 
   }
-  ListClass:any
-  init()
-  {
-    this.fbs.GetListClass().then((res)=>{
+  ListClass: any
+  init() {
+    this.fbs.GetListClass().then((res) => {
       this.ListClass = res;
-      
+
     })
-    
+
   }
   clickBtn(event) {
     document.querySelector('.btn-teacher.active').classList.remove('active');
@@ -32,8 +38,7 @@ export class ManageClassPage implements OnInit {
     const alert = await this.alert.create({
       cssClass: 'add-form',
       header: 'Thêm Class',
-      inputs: [
-        {
+      inputs: [{
           name: 'id',
           type: 'text',
           placeholder: 'ID class',
@@ -59,31 +64,28 @@ export class ManageClassPage implements OnInit {
           placeholder: 'Tên sv',
         }
       ],
-      buttons: [
-        {
-          text: 'Hủy',
-          role: 'cancel',
-          cssClass: 'cancel-alert',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Đồng ý',
-          handler: (res) => {
-            this.fbs.Admin_add_class(res.id, res.idobj, res.max, res.idsv, res.name).then((mes)=>{
-              console.log(mes);
-              this.init()
-            })
-          }
+      buttons: [{
+        text: 'Hủy',
+        role: 'cancel',
+        cssClass: 'cancel-alert',
+        handler: () => {
+          console.log('Confirm Cancel');
         }
-      ]
+      }, {
+        text: 'Đồng ý',
+        handler: (res) => {
+          this.fbs.Admin_add_class(res.id, res.idobj, res.max, res.idsv, res.name).then((mes) => {
+            console.log(mes);
+            this.init()
+          })
+        }
+      }]
     });
 
     await alert.present();
   }
 
-  async showInfo(item)
-  {
+  async showInfo(item) {
     // var students=[]
     // item.list.forEach(element => {
     //   {
@@ -92,29 +94,26 @@ export class ManageClassPage implements OnInit {
     // })
     const alert = await this.alert.create({
       header: 'Infor',
-      inputs:[
-        {
-          disabled:true,
-          value: 'ID: '+ item.property.id
+      inputs: [{
+          disabled: true,
+          value: 'ID: ' + item.property.id
         },
         {
-          disabled:true,
-          value: 'ID môn học: '+ item.property.idobj
+          disabled: true,
+          value: 'ID môn học: ' + item.property.idobj
         },
         {
-          disabled:true,
-          value: 'Số lượng tối đa: '+ item.property.max
+          disabled: true,
+          value: 'Số lượng tối đa: ' + item.property.max
         },
         {
-          disabled:true,
-          value: 'DS sv: '+ item.list
+          disabled: true,
+          value: 'DS sv: ' + item.list
         },
       ],
-      buttons:[
-        {
-          text: 'Đóng'
-        }
-      ]
+      buttons: [{
+        text: 'Đóng'
+      }]
     });
     await alert.present();
   }
@@ -156,12 +155,11 @@ export class ManageClassPage implements OnInit {
   // }
   async delete(id) {
     const alert = await this.alert.create({
-      header :'Bạn có muốn xóa không',
-      subHeader :'Bạn sẽ không thể khôi phục thao tác này',
-      buttons: [
-        {
+      header: 'Bạn có muốn xóa không',
+      subHeader: 'Bạn sẽ không thể khôi phục thao tác này',
+      buttons: [{
           text: 'Hủy',
-          role:'huy',
+          role: 'huy',
           cssClass: 'cancel-alert',
           handler: () => {
             console.log('Confirm Cancel');
@@ -170,7 +168,7 @@ export class ManageClassPage implements OnInit {
         {
           text: 'Đồng ý',
           handler: () => {
-            this.fbs.Admin_delete_class(id).then((mes)=>{
+            this.fbs.Admin_delete_class(id).then((mes) => {
               console.log(mes);
               this.init()
             })
@@ -179,5 +177,17 @@ export class ManageClassPage implements OnInit {
       ]
     })
     await alert.present();
+  }
+  filterSearch(searchBar) {
+    var value = searchBar.currentTarget.value.toUpperCase();
+    if (!value) {
+      this.init();
+      return;
+    }
+    this.ListClass = this.ListClass.filter(grid => {
+      if (grid.property.id || value) {
+        return grid.property.id.toUpperCase().indexOf(value) > -1;
+      }
+    });
   }
 }
