@@ -90,10 +90,10 @@ export class LoginPage implements OnInit {
   async CaughtionAlert() {
     const alert = await this.alert.create({
       cssClass: 'my-custom-class',
-      header: 'Caughtion',
-      message: 'This Account was not activated!',
+      header: 'Tài khoản này chưa được kích hoạt',
+      message: 'Vui lòng liên hệ quản trị viên để được cấp quyền',
       buttons: [{
-        text:'OK'
+        text:'Đóng'
         
       },
     ]
