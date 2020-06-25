@@ -11,14 +11,13 @@
     <ion-text>
       <p class="input-lb">Email đăng ký </p>
     </ion-text>
-    <ion-input class="input-field" value='{{teacherEmail}}' [(ngModel)]='txtemail'></ion-input>
+    <ion-input class="input-field disabled" disabled value='{{teacherEmail}}' [(ngModel)]='txtemail'></ion-input>
     <ion-text>
       <p class="input-lb">Số Điện Thoại </p>
     </ion-text>
     <ion-input class="input-field" value=''></ion-input>
   </div>
   <ion-buttons class="gv-btn-group">
-    <ion-button class="gv-btn gv-reset">Đặt lại</ion-button>
     <ion-button class="gv-btn gv-apply" (click)='update()'>Chỉnh Sửa</ion-button>
   </ion-buttons>
 </ion-content>

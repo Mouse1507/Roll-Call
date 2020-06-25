@@ -13,7 +13,7 @@
     <ion-item-sliding  *ngFor='let item of ListGV' class="each-item">
         <ion-item-options side="start" class="item-function">
             <ion-item-option color="warning" expandable class="expand-btn edit-btn" (click) ='editForm(item.id, item.name, item.email)'>
-                Edit
+                Sửa
             </ion-item-option>
         </ion-item-options>
         <ion-item class="item-info">
@@ -33,7 +33,7 @@
         </ion-item>
         <ion-item-options side="end" class="item-function">
             <ion-item-option color="danger" expandable class="expand-btn delete-btn" (click) ='delete(item.id)'>
-                Delete
+                Xóa
             </ion-item-option>
         </ion-item-options>
     </ion-item-sliding>

@@ -70,14 +70,14 @@ export class AttendancePage implements OnInit {
       message: 'Bạn có muốn kết thúc điểm danh',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Hủy',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'Okay',
+          text: 'Đồng ý',
           handler: () => {
             console.log('Confirm Okay');
             this.end();

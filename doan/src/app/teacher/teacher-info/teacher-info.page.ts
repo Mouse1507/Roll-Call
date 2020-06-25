@@ -48,10 +48,10 @@ export class TeacherInfoPage implements OnInit {
   async Alert(mes) {
     const alert = await this.alert.create({
       cssClass: 'my-custom-class',
-      header: 'Update',
+      header: 'Cập nhật',
       message: mes,
       buttons: [{
-        text:'OK',
+        text:'Đóng',
       },
     ]
     });

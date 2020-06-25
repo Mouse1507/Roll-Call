@@ -1,6 +1,6 @@
 <ion-content>
   <div class="schedule-box">
-    <ion-searchbar class="search-bar" placeholder='ten lop'></ion-searchbar>
+    <ion-searchbar class="search-bar" placeholder='ten lop' (ionChange)='filterSearch($event)'></ion-searchbar>
     <ion-grid class="time-pick-box">
       <ion-row>
         <ion-col>

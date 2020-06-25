@@ -113,4 +113,16 @@ export class TeacherClassPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
+  filterSearch(searchBar) {
+    var value = searchBar.currentTarget.value.toUpperCase();
+    if (!value) {
+      this.init();
+      return;
+    }
+    this.ListShow = this.ListShow.filter(grid => {
+      if (grid.object || value) {
+        return grid.object.toUpperCase().indexOf(value) > -1;
+      }
+    });
+  }
 }
