@@ -17,7 +17,7 @@
           <ion-searchbar class="search-bar" (ionChange)='filterSearch($event)'></ion-searchbar>
         </ion-col>
         <ion-col size='5'>
-          <ion-datetime class="time-pick" displayFormat="DD/MM/YYYY" placeholder="Chọn Ngày"></ion-datetime>
+          <ion-datetime class="time-pick" displayFormat="D/M/YYYY" placeholder="Chọn Ngày" [(ngModel)]="txtdate" (ionChange)="selectDate(this.txtdate)"></ion-datetime>
         </ion-col>
       </ion-row>
     </ion-grid>

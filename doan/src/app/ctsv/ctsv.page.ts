@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { FbserviceService } from '../service/fbservice.service'
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-ctsv',
@@ -12,7 +13,9 @@ export class CtsvPage implements OnInit {
   constructor(private loadingController: LoadingController, private fbs: FbserviceService) { }
 
   ngOnInit() {
-    this.init()
+    this.init(this.DATE)
+    console.log(this.txtDate);
+    
   }
   clickBtn(event) {
     var btnTeacher = document.querySelectorAll(".btn-teacher");
@@ -31,17 +34,19 @@ export class CtsvPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
+  txtDate:any
   date = new Date().getDate()
   month = new Date().getMonth()
   year = new Date().getFullYear()
   DATE = this.date + '-' + this.month + '-' + this.year
-  ListShow = []
+  ListShow: any
   ListAttendance: any
   ListObject = []
-  init() {
+  init(date) {
     this.fbs.GetInfoByClass().then((res) => {
       this.ListAttendance = res
       var ListObjectID = []
+      var listTemp=[]
       console.log(this.ListAttendance);
       this.fbs.GetListClass().then((res) => {
         var classes
@@ -68,7 +73,7 @@ export class CtsvPage implements OnInit {
           for (let i = 0; i < this.ListAttendance.length; i++) {
             var count = 0
 
-            this.fbs.GetCountbyIDandDay(this.ListAttendance[i].id, this.DATE).then((res) => {
+            this.fbs.GetCountbyIDandDay(this.ListAttendance[i].id, date).then((res) => {
               var list
               list = res
               if (list.length > 0) {
@@ -84,7 +89,7 @@ export class CtsvPage implements OnInit {
                   console.log(element.check);
 
                 });
-                this.ListShow.push({
+                listTemp.push({
                   id: this.ListAttendance[i].id,
                   name: this.ListObject[i],
                   count: count
@@ -95,6 +100,7 @@ export class CtsvPage implements OnInit {
             })
 
           }
+          this.ListShow = listTemp
           console.log(this.ListAttendance);
 
           console.log(this.ListShow);
@@ -103,10 +109,21 @@ export class CtsvPage implements OnInit {
       })
     })
   }
+
+  
+  selectDate(res){
+    console.log(res);
+    var date = new Date(res).getDate()
+    var month = new Date(res).getMonth()
+    var year = new Date(res).getFullYear()
+    var DATE = date+'-'+month+'-'+year
+    this.init(DATE)
+  }
+
   filterSearch(searchBar) {
     var value = searchBar.currentTarget.value.toUpperCase();
     if (!value) {
-      this.init();
+      this.init(this.DATE);
       return;
     }
     this.ListShow = this.ListShow.filter(grid => {
